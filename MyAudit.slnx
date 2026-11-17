@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="APIServices/APIServices.csproj" />
+  <Project Path="DataHub/DataHub.csproj" />
+</Solution>
