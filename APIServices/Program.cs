@@ -1,3 +1,5 @@
+using Common.Response;
+using Common.Services;
 using DataHub.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
@@ -10,6 +12,12 @@ builder.Services.AddDbContext<AppDBContext>(opt => opt.UseSqlServer(builder.Conf
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
+
+builder.Services.AddScoped<RspUser>();
+builder.Services.AddScoped<ResponseModel>();
+builder.Services.AddScoped<SrvcUser>();
+builder.Services.AddScoped<RspCommon<BtUser>>();
+builder.Services.AddScoped<RspCommon<ResponseModel>>();
 
 var app = builder.Build();
 

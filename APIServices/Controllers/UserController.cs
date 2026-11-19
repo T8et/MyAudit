@@ -1,4 +1,5 @@
-﻿using DataHub.Models;
+﻿using Common.Services;
+using DataHub.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ActionConstraints;
@@ -11,15 +12,19 @@ namespace APIServices.Controllers
     public class UserController : ControllerBase
     {
         private readonly AppDBContext _db;
-        public UserController(AppDBContext db)
+
+        private readonly SrvcUser _srvc;
+
+        public UserController(AppDBContext db, SrvcUser srvc)
         {
             _db = db;
+            _srvc = srvc;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetUserList()
         {
-            var lstuser = await _db.BtUsers.Where(u=>u.UserSts!="0").ToListAsync();
+            var lstuser = await _srvc.UserList();
             return Ok(lstuser);
         }
 
