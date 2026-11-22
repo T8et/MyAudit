@@ -9,9 +9,4 @@ namespace Common.Response
     {
         public RspCommon<BtUser>? ResponseUser { get; set; }
     }
-
-    public class ResponseModel
-    {
-        public List<BtUser>? usrlst { get; set; }
-    }
 }
