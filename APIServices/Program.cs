@@ -15,9 +15,11 @@ builder.Services.AddOpenApi();
 
 builder.Services.AddScoped<RspUser>();
 builder.Services.AddScoped<RspGrp>();
+builder.Services.AddScoped<RspGrpDtl>();
 builder.Services.AddScoped<ResponseModel>();
 builder.Services.AddScoped<SrvcUser>();
 builder.Services.AddScoped<SrvcGrp>();
+builder.Services.AddScoped<SrvcGrpDtl>();
 builder.Services.AddScoped<RspCommon<BtUser>>();
 builder.Services.AddScoped<RspCommon<ResponseModel>>();
 

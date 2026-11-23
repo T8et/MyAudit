@@ -10,5 +10,7 @@ namespace Common.Response
         public List<BtUser>? usrlst { get; set; }
 
         public List<BtGrp>?  grplst { get; set; }
+
+        public List<BtGrpDtl>? grpdtdtl { get; set; }
     }
 }
