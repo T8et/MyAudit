@@ -42,6 +42,7 @@ namespace Common.Services
         {
             if(data is not null)
             {
+                data.UserId = UserCode();
                 await _db.BtUsers.AddAsync(data);
                 await _db.SaveChangesAsync();
                 return RspCommon<BtUser>.Success("200", "New User Created Successfully", data);
@@ -50,7 +51,7 @@ namespace Common.Services
         }
 
         public async Task<RspCommon<BtUser>> UpdateUser(BtUser data)
-        {
+        { 
             if(data is not null)
             {
                 var upData = await _db.BtUsers.Where(u => u.UserId == data.UserId).FirstOrDefaultAsync();
@@ -84,6 +85,18 @@ namespace Common.Services
                 }
             }
             return RspCommon<BtUser>.DataNotExist("401", "Data not exists");
+        }
+
+        public string UserCode()
+        {
+            var random = new Random();
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            string newcode = new string(Enumerable.Repeat(chars, 3)
+                .Select(s => s[random.Next(s.Length)]).ToArray());
+
+            SrvcCodeGenerator codegen = new SrvcCodeGenerator();
+            newcode = codegen.UserCodeGenerator(newcode);
+            return newcode;
         }
     }
 }

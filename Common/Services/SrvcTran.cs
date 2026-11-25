@@ -43,6 +43,7 @@ namespace Common.Services
         {
             if (data is not null)
             {
+                data.TranId = TranCode();
                 await _db.BtTrans.AddAsync(data);
                 await _db.SaveChangesAsync();
                 return RspCommon<BtTran>.Success("200", "Transaction Created Successfully", data);
@@ -68,6 +69,18 @@ namespace Common.Services
                 return RspCommon<BtTran>.DataNotExist("401", "Selected transaction not found");
             }
             return RspCommon<BtTran>.DataNotExist("401", "Data not exists");
+        }
+
+        public string TranCode()
+        {
+            var random = new Random();
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            string newcode = new string(Enumerable.Repeat(chars, 3)
+                .Select(s => s[random.Next(s.Length)]).ToArray());
+
+            SrvcCodeGenerator codegen = new SrvcCodeGenerator();
+            newcode = codegen.TranCodeGenerator(newcode);
+            return newcode;
         }
     }
 }
